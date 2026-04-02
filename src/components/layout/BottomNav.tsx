@@ -1,7 +1,7 @@
 import { useAppStore } from '../../store/useAppStore';
 
 export function BottomNav() {
-  const { screen, gameMode, setScreen, setGameMode } = useAppStore();
+  const { screen, setScreen, setGameMode } = useAppStore();
 
   const items = [
     {
