@@ -6,71 +6,76 @@ interface NavItem {
   icon: string;
   action: () => void;
   isActive: (screen: Screen | null, mode: GameMode) => boolean;
-  simpleOnly?: boolean;
 }
 
-export function Sidebar() {
+interface SidebarProps {
+  onNavigate?: () => void;
+}
+
+export function Sidebar({ onNavigate }: SidebarProps) {
   const { screen, gameMode, setScreen, setGameMode, simpleMode, setSimpleMode } = useAppStore();
+
+  const wrap = (fn: () => void) => () => { fn(); onNavigate?.(); };
 
   const allNavItems: NavItem[] = [
     {
       label: 'בית',
       icon: '🏠',
-      action: () => setScreen('home'),
+      action: wrap(() => setScreen('home')),
       isActive: (s) => s === 'home',
     },
     {
       label: 'שמות ותמונות',
       icon: '👤',
-      action: () => setGameMode('names'),
+      action: wrap(() => setGameMode('names')),
       isActive: (s, m) => s === 'game' && m === 'names',
     },
     {
       label: 'תמונות ואירועים',
       icon: '📅',
-      action: () => setGameMode('events'),
+      action: wrap(() => setGameMode('events')),
       isActive: (s, m) => s === 'game' && m === 'events',
     },
     {
       label: 'תמונות ומשפחות',
       icon: '👨‍👩‍👧',
-      action: () => setGameMode('families'),
+      action: wrap(() => setGameMode('families')),
       isActive: (s, m) => s === 'game' && m === 'families',
     },
     {
       label: 'סדר כרונולוגי',
       icon: '📆',
-      action: () => setGameMode('chronological'),
+      action: wrap(() => setGameMode('chronological')),
       isActive: (s, m) => s === 'game' && m === 'chronological',
     },
     {
       label: 'גלריה',
       icon: '🖼️',
-      action: () => setScreen('gallery'),
+      action: wrap(() => setScreen('gallery')),
       isActive: (s) => s === 'gallery',
     },
     {
       label: 'אנשי קשר',
       icon: '👥',
-      action: () => setScreen('contacts'),
+      action: wrap(() => setScreen('contacts')),
       isActive: (s) => s === 'contacts',
     },
     {
       label: 'טיפים',
       icon: '💡',
-      action: () => setScreen('tips'),
+      action: wrap(() => setScreen('tips')),
       isActive: (s) => s === 'tips',
     },
     {
       label: 'שאלות',
       icon: '❓',
-      action: () => setScreen('questions'),
+      action: wrap(() => setScreen('questions')),
       isActive: (s) => s === 'questions',
     },
     {
       label: 'ניהול תמונות',
       icon: '📤',
-      action: () => setScreen('upload'),
+      action: wrap(() => setScreen('upload')),
       isActive: (s) => s === 'upload',
     },
   ];
@@ -79,37 +84,37 @@ export function Sidebar() {
     {
       label: 'בית',
       icon: '🏠',
-      action: () => setScreen('home'),
+      action: wrap(() => setScreen('home')),
       isActive: (s) => s === 'home',
     },
     {
       label: 'משחק',
       icon: '🎮',
-      action: () => setGameMode('names'),
+      action: wrap(() => setGameMode('names')),
       isActive: (s) => s === 'game',
     },
     {
       label: 'גלריה',
       icon: '🖼️',
-      action: () => setScreen('gallery'),
+      action: wrap(() => setScreen('gallery')),
       isActive: (s) => s === 'gallery',
     },
     {
       label: 'אנשי קשר',
       icon: '👥',
-      action: () => setScreen('contacts'),
+      action: wrap(() => setScreen('contacts')),
       isActive: (s) => s === 'contacts',
     },
     {
       label: 'טיפים',
       icon: '💡',
-      action: () => setScreen('tips'),
+      action: wrap(() => setScreen('tips')),
       isActive: (s) => s === 'tips',
     },
     {
       label: 'שאלות',
       icon: '❓',
-      action: () => setScreen('questions'),
+      action: wrap(() => setScreen('questions')),
       isActive: (s) => s === 'questions',
     },
   ];
@@ -118,68 +123,66 @@ export function Sidebar() {
 
   return (
     <aside
-      className="flex-shrink-0 flex flex-col"
+      className="flex flex-col h-full min-h-screen"
       style={{
-        width: simpleMode ? 220 : 260,
-        minHeight: '100vh',
-        background: 'linear-gradient(180deg, #1B5E20 0%, #2E7D32 100%)',
+        width: 264,
+        background: 'linear-gradient(180deg, #1B5E20 0%, #145218 100%)',
       }}
+      aria-label="תפריט ראשי"
     >
-      {/* Header */}
-      <div className="px-5 py-7 border-b border-green-600">
+      {/* Logo */}
+      <div className="px-6 py-7 border-b border-green-700">
         <button
-          onClick={() => setScreen('home')}
-          className="bg-transparent border-none cursor-pointer text-right w-full p-0"
+          onClick={wrap(() => setScreen('home'))}
+          className="bg-transparent border-none cursor-pointer text-right w-full p-0 min-h-0"
+          aria-label="עמוד הבית"
         >
           <div className="text-white text-2xl font-black leading-tight">🧠 משחק זיכרון</div>
-          <div className="text-green-200 text-sm mt-1 font-medium">לשמירה על הזיכרון</div>
+          <div className="text-green-300 text-base mt-1 font-medium">לשיפור החשיבה והזיכרון</div>
         </button>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 py-3 overflow-y-auto">
+      {/* Nav items */}
+      <nav className="flex-1 py-3 overflow-y-auto" aria-label="ניווט">
         {navItems.map((item) => {
           const active = item.isActive(screen, gameMode);
           return (
             <button
               key={item.label}
               onClick={item.action}
+              aria-current={active ? 'page' : undefined}
               className={[
-                'w-full flex items-center gap-3 px-5 text-right transition-all duration-150 cursor-pointer border-none outline-none',
-                simpleMode ? 'min-h-[72px] text-[1.15rem]' : 'min-h-[60px] text-[1.05rem]',
-                'font-bold',
+                'w-full flex items-center gap-4 px-6 text-right',
+                'transition-all duration-150 cursor-pointer border-none outline-none',
+                'min-h-[68px] text-xl font-bold',
                 active
-                  ? 'bg-white text-primary shadow-strong'
-                  : 'bg-transparent text-white hover:bg-green-700',
+                  ? 'bg-white text-primary'
+                  : 'bg-transparent text-white hover:bg-green-800',
               ].join(' ')}
             >
-              <span className={simpleMode ? 'text-3xl flex-shrink-0' : 'text-2xl flex-shrink-0'}>
-                {item.icon}
-              </span>
+              <span className="text-2xl flex-shrink-0" aria-hidden="true">{item.icon}</span>
               <span className="leading-tight">{item.label}</span>
             </button>
           );
         })}
       </nav>
 
-      {/* Simple Mode Toggle */}
-      <div className="px-4 py-4 border-t border-green-600">
+      {/* Simple mode toggle */}
+      <div className="px-5 py-5 border-t border-green-700 space-y-2">
         <button
           onClick={() => setSimpleMode(!simpleMode)}
           className={[
-            'w-full flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-base cursor-pointer border-2 transition-all',
+            'w-full flex items-center justify-center gap-2 py-3 rounded-xl',
+            'font-bold text-lg cursor-pointer border-2 transition-all min-h-[56px]',
             simpleMode
               ? 'bg-white text-primary border-white'
-              : 'bg-transparent text-green-200 border-green-500 hover:bg-green-700',
+              : 'bg-transparent text-green-200 border-green-500 hover:bg-green-800',
           ].join(' ')}
+          aria-pressed={simpleMode}
         >
           {simpleMode ? '🔍 מצב מלא' : '🔠 מצב פשוט'}
         </button>
-        {!simpleMode && (
-          <p className="text-green-400 text-xs text-center mt-2">
-            פותח לסיוע לאוכלוסייה המבוגרת
-          </p>
-        )}
+        <p className="text-green-400 text-sm text-center">פותח לסיוע לאוכלוסייה המבוגרת</p>
       </div>
     </aside>
   );
