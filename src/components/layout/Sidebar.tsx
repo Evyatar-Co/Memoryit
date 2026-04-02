@@ -55,12 +55,6 @@ export function Sidebar({ onNavigate }: SidebarProps) {
       isActive: (s) => s === 'gallery',
     },
     {
-      label: 'אנשי קשר',
-      icon: '👥',
-      action: wrap(() => setScreen('contacts')),
-      isActive: (s) => s === 'contacts',
-    },
-    {
       label: 'טיפים',
       icon: '💡',
       action: wrap(() => setScreen('tips')),
@@ -98,12 +92,6 @@ export function Sidebar({ onNavigate }: SidebarProps) {
       icon: '🖼️',
       action: wrap(() => setScreen('gallery')),
       isActive: (s) => s === 'gallery',
-    },
-    {
-      label: 'אנשי קשר',
-      icon: '👥',
-      action: wrap(() => setScreen('contacts')),
-      isActive: (s) => s === 'contacts',
     },
     {
       label: 'טיפים',

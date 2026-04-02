@@ -23,12 +23,6 @@ export function BottomNav() {
       active: screen === 'gallery',
     },
     {
-      label: 'קשר',
-      icon: '👥',
-      action: () => setScreen('contacts'),
-      active: screen === 'contacts',
-    },
-    {
       label: 'עוד',
       icon: '⋯',
       action: () => setScreen('tips'),

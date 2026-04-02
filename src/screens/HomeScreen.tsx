@@ -67,10 +67,10 @@ export function HomeScreen() {
   ];
 
   const quickLinks = [
-    { label: 'גלריה',     icon: '🖼️', action: () => setScreen('gallery') },
-    { label: 'אנשי קשר', icon: '👥', action: () => setScreen('contacts') },
-    { label: 'טיפים',    icon: '💡', action: () => setScreen('tips') },
-    { label: 'שאלות',    icon: '❓', action: () => setScreen('questions') },
+    { label: 'גלריה',  icon: '🖼️', action: () => setScreen('gallery') },
+    { label: 'טיפים',  icon: '💡', action: () => setScreen('tips') },
+    { label: 'שאלות',  icon: '❓', action: () => setScreen('questions') },
+    { label: 'תמונות', icon: '📤', action: () => setScreen('upload') },
   ];
 
   return (
