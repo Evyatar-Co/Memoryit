@@ -17,49 +17,78 @@ export function Layout({ children }: LayoutProps) {
       dir="rtl"
       style={simpleMode ? { fontSize: '1.2rem' } : undefined}
     >
-      {/* ── Desktop sidebar (hidden on mobile) ── */}
-      <div className="hidden lg:block flex-shrink-0">
+      {/* ── Desktop sidebar — only on screens ≥ 900px ── */}
+      <div className="hidden" style={{ display: undefined }} id="desktop-sidebar">
+        <style>{`@media (min-width: 900px) { #desktop-sidebar { display: block !important; } }`}</style>
         <Sidebar />
       </div>
 
-      {/* ── Mobile drawer overlay ── */}
+      {/* ── Mobile drawer ── */}
       {sidebarOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
-          {/* Backdrop */}
+        <div className="fixed inset-0 z-50">
           <div
-            className="absolute inset-0 bg-black/50"
+            className="absolute inset-0 bg-black/60"
             onClick={() => setSidebarOpen(false)}
             aria-hidden="true"
           />
-          {/* Drawer */}
-          <div className="absolute top-0 right-0 bottom-0 w-[280px] z-50 overflow-y-auto shadow-strong">
+          <div
+            className="absolute top-0 right-0 bottom-0 z-50 overflow-y-auto shadow-strong"
+            style={{ width: 'min(280px, 85vw)' }}
+          >
             <Sidebar onNavigate={() => setSidebarOpen(false)} />
           </div>
         </div>
       )}
 
-      {/* ── Main content ── */}
+      {/* ── Main ── */}
       <main className="flex-1 flex flex-col min-w-0 overflow-x-hidden">
-        {/* Mobile top bar */}
-        <header className="lg:hidden sticky top-0 z-30 bg-primary shadow-strong flex items-center justify-between px-4 py-3">
+        {/* Top bar — always visible on mobile, hidden on desktop */}
+        <header
+          className="sticky top-0 z-30 shadow-strong flex items-center justify-between px-4"
+          style={{
+            background: '#1B5E20',
+            minHeight: 64,
+            display: 'flex',
+          }}
+          id="mobile-topbar"
+        >
+          <style>{`@media (min-width: 900px) { #mobile-topbar { display: none !important; } }`}</style>
           <div className="text-white text-xl font-black">🧠 משחק זיכרון</div>
           <button
             onClick={() => setSidebarOpen(true)}
-            className="text-white text-3xl min-h-[56px] min-w-[56px] bg-transparent border-none cursor-pointer"
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: 'white',
+              fontSize: 32,
+              cursor: 'pointer',
+              minWidth: 56,
+              minHeight: 56,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 8,
+            }}
             aria-label="פתח תפריט"
           >
             ☰
           </button>
         </header>
 
-        {/* Page content */}
-        <div className="flex-1 p-4 sm:p-6 pb-28 lg:pb-6">
+        {/* Page content — extra bottom padding so BottomNav doesn't cover content */}
+        <div
+          className="flex-1 p-4"
+          style={{ paddingBottom: 96 }}
+          id="main-content"
+        >
+          <style>{`@media (min-width: 900px) { #main-content { padding-bottom: 24px !important; } }`}</style>
           {children}
         </div>
       </main>
 
-      {/* ── Mobile bottom nav (hidden on desktop) ── */}
-      <div className="lg:hidden">
+      {/* ── Bottom nav — mobile only ── */}
+      <div id="bottom-nav-wrapper">
+        <style>{`@media (min-width: 900px) { #bottom-nav-wrapper { display: none !important; } }`}</style>
         <BottomNav />
       </div>
     </div>
