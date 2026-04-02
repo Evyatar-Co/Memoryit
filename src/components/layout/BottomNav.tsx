@@ -67,10 +67,10 @@ export function BottomNav() {
             paddingTop: 10,
             paddingBottom: 10,
             minHeight: 68,
-            background: item.active ? '#E8F5E9' : 'transparent',
+            background: item.active ? '#E8EAF6' : 'transparent',
             border: 'none',
             cursor: 'pointer',
-            color: item.active ? '#1B5E20' : '#374151',
+            color: item.active ? '#1A237E' : '#374151',
             fontWeight: 700,
             fontFamily: "'Heebo', sans-serif",
           }}

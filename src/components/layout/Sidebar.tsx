@@ -126,19 +126,19 @@ export function Sidebar({ onNavigate }: SidebarProps) {
       className="flex flex-col h-full min-h-screen"
       style={{
         width: 264,
-        background: 'linear-gradient(180deg, #1B5E20 0%, #145218 100%)',
+        background: 'linear-gradient(180deg, #1A237E 0%, #121858 100%)',
       }}
       aria-label="תפריט ראשי"
     >
       {/* Logo */}
-      <div className="px-6 py-7 border-b border-green-700">
+      <div className="px-6 py-7 border-b border-indigo-900">
         <button
           onClick={wrap(() => setScreen('home'))}
           className="bg-transparent border-none cursor-pointer text-right w-full p-0 min-h-0"
           aria-label="עמוד הבית"
         >
           <div className="text-white text-2xl font-black leading-tight">🧠 משחק זיכרון</div>
-          <div className="text-green-300 text-base mt-1 font-medium">לשיפור החשיבה והזיכרון</div>
+          <div className="text-indigo-300 text-base mt-1 font-medium">לשיפור החשיבה והזיכרון</div>
         </button>
       </div>
 
@@ -157,7 +157,7 @@ export function Sidebar({ onNavigate }: SidebarProps) {
                 'min-h-[68px] text-xl font-bold',
                 active
                   ? 'bg-white text-primary'
-                  : 'bg-transparent text-white hover:bg-green-800',
+                  : 'bg-transparent text-white hover:bg-indigo-900',
               ].join(' ')}
             >
               <span className="text-2xl flex-shrink-0" aria-hidden="true">{item.icon}</span>
@@ -168,7 +168,7 @@ export function Sidebar({ onNavigate }: SidebarProps) {
       </nav>
 
       {/* Simple mode toggle */}
-      <div className="px-5 py-5 border-t border-green-700 space-y-2">
+      <div className="px-5 py-5 border-t border-indigo-900 space-y-2">
         <button
           onClick={() => setSimpleMode(!simpleMode)}
           className={[
@@ -176,13 +176,13 @@ export function Sidebar({ onNavigate }: SidebarProps) {
             'font-bold text-lg cursor-pointer border-2 transition-all min-h-[56px]',
             simpleMode
               ? 'bg-white text-primary border-white'
-              : 'bg-transparent text-green-200 border-green-500 hover:bg-green-800',
+              : 'bg-transparent text-indigo-200 border-green-500 hover:bg-indigo-900',
           ].join(' ')}
           aria-pressed={simpleMode}
         >
           {simpleMode ? '🔍 מצב מלא' : '🔠 מצב פשוט'}
         </button>
-        <p className="text-green-400 text-sm text-center">פותח לסיוע לאוכלוסייה המבוגרת</p>
+        <p className="text-indigo-400 text-sm text-center">פותח לסיוע לאוכלוסייה המבוגרת</p>
       </div>
     </aside>
   );

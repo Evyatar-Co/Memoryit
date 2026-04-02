@@ -79,7 +79,7 @@ export function HomeScreen() {
       {/* ── Hero: Clock + Date ── */}
       <div
         className="rounded-2xl p-6 sm:p-8 mb-6 text-white text-center shadow-strong"
-        style={{ background: 'linear-gradient(135deg, #1B5E20 0%, #1565C0 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #1A237E 0%, #6A1B9A 100%)' }}
         role="banner"
         aria-label="שעה ותאריך"
       >

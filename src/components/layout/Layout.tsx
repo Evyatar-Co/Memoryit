@@ -46,7 +46,7 @@ export function Layout({ children }: LayoutProps) {
         <header
           className="sticky top-0 z-30 shadow-strong flex items-center justify-between px-4"
           style={{
-            background: '#1B5E20',
+            background: '#1A237E',
             minHeight: 64,
             display: 'flex',
           }}

@@ -24,7 +24,7 @@
 
   /* Strong focus ring for keyboard nav */
   :focus-visible {
-    outline: 3px solid #1B5E20;
+    outline: 3px solid #1A237E;
     outline-offset: 3px;
     border-radius: 8px;
   }

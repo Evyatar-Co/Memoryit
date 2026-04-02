@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary:       '#1B5E20',
-        'primary-hover':'#145218',
-        'primary-light':'#E8F5E9',
-        secondary:     '#1565C0',
-        'secondary-light':'#E3F2FD',
+        primary:       '#1A237E',
+        'primary-hover':'#121858',
+        'primary-light':'#E8EAF6',
+        secondary:     '#6A1B9A',
+        'secondary-light':'#F3E5F5',
         accent:        '#E65100',
         'accent-light':'#FFF3E0',
         bg:            '#F5F6FA',
